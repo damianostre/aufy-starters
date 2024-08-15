@@ -2,12 +2,12 @@
 import {useState} from "react";
 
 export const ExternalProviders = () => {
-    const auth = useAuth();
+    const { aufy } = useAuth();
     const [disabled, setDisabled] = useState(false)
     
     const challenge = (provider: string) => {
         if (disabled) return;
-        auth.challenge({ provider });
+        aufy.externalChallenge({ provider });
         setDisabled(true);
     };
     

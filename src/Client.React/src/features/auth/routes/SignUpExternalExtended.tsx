@@ -3,19 +3,19 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useState} from "react";
-import {extractApiErrors} from "../../../lib/axios.ts";
 import {useAuth} from "../../../providers/AuthProvider.tsx";
+import { extractApiErrors } from 'aufy-client/src/axios-utils.ts';
 
 export const SignUpExternalExtended = () => {
     const [apiErrors, setApiErrors] = useState<string[]>();
-    const auth = useAuth();
+    const { aufy } = useAuth();
     const navigate = useNavigate();
     const {register, handleSubmit, formState: {isSubmitting, errors}} = useForm<FormModel>({
         resolver: zodResolver(validationSchema),
     });
 
     const onSubmit: SubmitHandler<FormModel> = data => {
-        return auth.signUpExternal({
+        return aufy.signUpExternal({
             aboutMe: data.aboutMe,
             mySiteUrl: data.mySiteUrl,
         }).then(() => {

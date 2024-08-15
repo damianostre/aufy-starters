@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Items", "_Items", "{896141
 		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AufyClient", "AufyClient\AufyClient.csproj", "{1686554E-04CC-4F62-9AE4-77406C8715F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FAEA295D-773F-445E-9AFE-EC9C5663D4BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAEA295D-773F-445E-9AFE-EC9C5663D4BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAEA295D-773F-445E-9AFE-EC9C5663D4BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1686554E-04CC-4F62-9AE4-77406C8715F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1686554E-04CC-4F62-9AE4-77406C8715F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1686554E-04CC-4F62-9AE4-77406C8715F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1686554E-04CC-4F62-9AE4-77406C8715F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CEF1977E-A9BC-4999-B5FB-4F522C556D24} = {6E76CD50-4F89-403A-893B-F5185B9196AA}

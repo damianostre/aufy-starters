@@ -1,13 +1,14 @@
 import {useState} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import {auth} from "../../../api/auth.ts";
-import {extractApiErrors} from "../../../lib/axios.ts";
 import {z} from "zod";
+import { useAuth } from '../../../providers/AuthProvider.tsx';
+import { extractApiErrors } from 'aufy-client/src/axios-utils.ts';
 
 export const ResendEmailConfirmation = () => {
     const [apiErrors, setApiErrors] = useState<string[] | null>();
     const [notification, setNotification] = useState<string>();
+    const { aufy } = useAuth();
 
     const {
         register,
@@ -18,7 +19,7 @@ export const ResendEmailConfirmation = () => {
         resolver: zodResolver(validationSchema),
     });
     const onSubmit: SubmitHandler<FormModel> = data => {
-        return auth.resendEmailConfirmation(data.email).then(() => {
+        return aufy.resendEmailConfirmation(data.email).then(() => {
             setApiErrors(null);
             setNotification("Email sent successfully");
             reset();

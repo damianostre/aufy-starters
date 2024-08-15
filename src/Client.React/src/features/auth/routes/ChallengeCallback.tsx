@@ -8,12 +8,12 @@ export const ChallengeCallback = () => {
     const signup = params.get("signup");
     const failed = params.get("failed");
 
-    const auth = useAuth();
+    const { aufy } = useAuth();
     useEffect(() => {
         if (failed) {
             navigate("/signin")
         } else if (!signup) {
-            auth.signInExternal().then(() => {
+            aufy.signInExternal().then(() => {
                 navigate("/profile")
             }).catch(() => {
                 navigate("/signin?error=external-signin-failed")

@@ -1,8 +1,8 @@
-import {AuthUser} from "../api/auth.ts";
+import { AuthUser } from './types.ts'
 
 const storagePrefix = 'aufy_';
 
-const storage = {
+export const aufyDefaultStorage: AufyStorage = {
     getUser: () => {
         return JSON.parse(window.localStorage.getItem(`${storagePrefix}user`) as string);
     },
@@ -23,4 +23,11 @@ const storage = {
     },
 };
 
-export default storage;
+export interface AufyStorage {
+    getUser: () => AuthUser | null;
+    setUser: (user: AuthUser) => void;
+    clearUser: () => void;
+    getToken: () => string | null;
+    setToken: (token: string) => void;
+    clearToken: () => void;
+}

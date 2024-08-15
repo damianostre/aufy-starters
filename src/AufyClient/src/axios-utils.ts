@@ -1,13 +1,14 @@
-import Axios, {AxiosError} from 'axios';
+import Axios, { AxiosError, CreateAxiosDefaults } from 'axios'
 
-export const axiosCreate = () => {
+export const createAxiosInstance = (apiBaseUrl: string, config?: CreateAxiosDefaults) => {
     return Axios.create({
-        baseURL: import.meta.env.VITE_API_URL,
+        baseURL: apiBaseUrl,
         withCredentials: true,
+
+        ...config
     });
 }
 
-export const axios = axiosCreate();
 export const extractApiErrors = (error: any) => {
     if (!Axios.isAxiosError(error)) return null;
 

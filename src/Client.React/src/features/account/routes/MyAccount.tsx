@@ -1,11 +1,13 @@
-import {useEffect, useState} from "react";
-import {AccountInfoResponse, auth} from "../../../api/auth.ts";
-import {ChangePasswordForm} from "../components/ChangePasswordForm.tsx";
+import { useEffect, useState } from 'react';
+import { ChangePasswordForm } from '../components/ChangePasswordForm.tsx';
+import { useAuth } from '../../../providers/AuthProvider.tsx';
+import { AccountInfoResponse } from 'aufy-client/src/types.ts';
 
 export const MyAccount = () => {
+    const { aufy } = useAuth();
     const [user, setUser] = useState<AccountInfoResponse>();
     useEffect(() => {
-        auth.accountInfo().then((res) => {
+        aufy.accountInfo().then((res) => {
             setUser(res);
         });
     }, []);
@@ -21,28 +23,28 @@ export const MyAccount = () => {
                             <dt className="text-sm font-medium leading-6 text-gray-900">Email address</dt>
                             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{user?.email}</dd>
                         </div>
-                        
+
                         <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt className="text-sm font-medium leading-6 text-gray-900">Logins</dt>
-                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{user?.logins.join(", ")}</dd>
+                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{user?.logins.join(', ')}</dd>
                         </div>
-                        
+
                         {user?.hasPassword && <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt className="text-sm font-medium leading-6 text-gray-900">Change password</dt>
                             <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
                                 <div className="mt-10 sm:w-full sm:max-w-[480px]">
-                                    <ChangePasswordForm/>
+                                    <ChangePasswordForm />
                                 </div>
                             </dd>
                         </div>}
 
                         <div className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
                             <dt className="text-sm font-medium leading-6 text-gray-900">Roles</dt>
-                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{user?.roles.join(", ")}</dd>
+                            <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{user?.roles.join(', ')}</dd>
                         </div>
                     </dl>
                 </div>
             </div>
         </>
-    )
+    );
 };
