@@ -17,13 +17,15 @@ export class AufyClient {
     private readonly accountApiPrefix: string;
     private readonly storage: AufyStorage;
     private readonly axios: AxiosInstance;
-    private onSignOut: () => void = () => {};
-    private onSignIn: (user: AuthUser) => void = () => {};
+    private onSignOut: () => void = () => {
+    };
+    private onSignIn: (user: AuthUser) => void = () => {
+    };
 
     constructor(options: AufyClientOptions) {
         this.apiBaseUrl = options.apiBaseUrl;
-        this.authApiPrefix = options.authApiPrefix || '/api/auth';
-        this.accountApiPrefix = options.accountApiPrefix || '/api/account';
+        this.authApiPrefix = options.authApiPrefix || '/auth';
+        this.accountApiPrefix = options.accountApiPrefix || '/account';
         this.storage = options.storage || aufyDefaultStorage;
         this.axios = options.axiosInstance;
     }
@@ -98,12 +100,15 @@ export class AufyClient {
         return this.axios.get<WhoAmIResponse>(this.authApiPrefix + '/whoami').then(res => res.data);
     }
 
-    async signOut() {
-        this.storage.clearToken();
-        this.storage.clearUser();
+    async signOut(): Promise<void> {
+        return this.axios.post(this.authApiPrefix + '/signout')
+            .then(() => {})
+            .finally(() => {
+                this.storage.clearToken();
+                this.storage.clearUser();
 
-        this.onSignOut && this.onSignOut();
-        return this.axios.post(this.authApiPrefix + '/signout');
+                this.onSignOut && this.onSignOut();
+            });
     };
 
     async refreshToken(): Promise<TokenResponse> {
@@ -155,7 +160,8 @@ export class AufyClient {
                 originalConfig._retry = true;
                 return tryRefreshToken(originalConfig);
             } else if (error.response?.status === 401 && !expired) {
-                await this.signOut();
+                this.storage.clearToken();
+                this.storage.clearUser();
                 onSignOut && onSignOut();
             }
 
