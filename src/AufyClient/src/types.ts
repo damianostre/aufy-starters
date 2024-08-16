@@ -39,6 +39,7 @@ export interface SignInRequest {
 
 export interface ExternalChallengeRequest {
   provider: string;
+  mode: ChallengeMode;
 }
 
 export interface WhoAmIResponse {
@@ -82,3 +83,5 @@ export interface SignInModel {
   password: string;
   rememberMe: boolean;
 }
+
+export type ChallengeMode = 'SignIn' | 'LinkLogin';
