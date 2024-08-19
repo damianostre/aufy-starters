@@ -41,6 +41,8 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\aufy\src\Aufy.EntityFrameworkCore\Aufy.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\..\aufy\src\Aufy.FluentEmail\Aufy.FluentEmail.csproj" />
+        <ProjectReference Include="..\Client.React\Client.React.csproj" />
+        <ProjectReference Include="..\Client.Vue\Client.Vue.csproj" />
     </ItemGroup>
 
     <ItemGroup>

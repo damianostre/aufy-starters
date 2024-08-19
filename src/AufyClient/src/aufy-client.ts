@@ -1,6 +1,6 @@
-import {aufyDefaultStorage, AufyStorage} from './aufy-storage.ts';
-import {createAxiosInstance} from './axios-utils.ts';
-import Axios, {AxiosInstance, AxiosResponse, InternalAxiosRequestConfig} from 'axios';
+import { aufyDefaultStorage, AufyStorage } from './aufy-storage.js';
+import { createAxiosInstance } from './axios-utils.js';
+import Axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import {
     AccountInfoResponse, AufyClientOptions,
     AuthUser, ChangePasswordRequest,
@@ -9,7 +9,7 @@ import {
     SignUpRequest,
     SignUpResponse,
     TokenResponse, WhoAmIResponse,
-} from './types.ts';
+} from './types.js';
 
 export class AufyClient {
     private readonly apiBaseUrl: string;
@@ -51,7 +51,7 @@ export class AufyClient {
     async signIn(data: SignInRequest): Promise<AuthUser> {
         return this.axios.post<TokenResponse>(this.authApiPrefix + '/signin', data)
             .then((tokenRes) => {
-                const user = {email: data.email} as AuthUser;
+                const user = { email: data.email } as AuthUser;
                 this.storage.setUser(user);
                 this.storage.setToken(tokenRes.data.access_token);
 
@@ -62,8 +62,8 @@ export class AufyClient {
 
     externalChallenge(data: ExternalChallengeRequest) {
         const callbackUrl = data.mode == 'SignIn'
-            ? window.location.origin + "/external-challenge-callback/" + data.provider
-            : window.location.origin + "/profile?link=" + data.provider;
+            ? window.location.origin + '/external-challenge-callback/' + data.provider
+            : window.location.origin + '/profile?link=' + data.provider;
 
 
         const api = this.apiBaseUrl + this.authApiPrefix + '/external/challenge/' + data.provider
@@ -86,7 +86,7 @@ export class AufyClient {
         return this.axios.post<TokenResponse>(this.authApiPrefix + path, data).then((tokenRes) => {
             this.storage.setToken(tokenRes.data.access_token);
             return this.axios.get<WhoAmIResponse>(this.authApiPrefix + '/whoami').then((res) => {
-                const user = {email: res.data.email} as AuthUser;
+                const user = { email: res.data.email } as AuthUser;
                 this.storage.setUser(user);
 
                 this.onSignIn && this.onSignIn(user);
@@ -101,7 +101,7 @@ export class AufyClient {
         return this.axios.post<TokenResponse>(this.authApiPrefix + path).then((tokenRes) => {
             this.storage.setToken(tokenRes.data.access_token);
             return this.axios.get<WhoAmIResponse>(this.authApiPrefix + '/whoami').then((res) => {
-                const user = {email: res.data.email} as AuthUser;
+                const user = { email: res.data.email } as AuthUser;
                 this.storage.setUser(user);
 
                 this.onSignIn && this.onSignIn(user);
@@ -135,7 +135,7 @@ export class AufyClient {
     }
 
     async forgotPassword(email: string) {
-        return this.axios.post(this.accountApiPrefix + '/password/forgot', {email});
+        return this.axios.post(this.accountApiPrefix + '/password/forgot', { email });
     };
 
     async resetPassword(data: ResetPasswordRequest): Promise<AxiosResponse> {
@@ -147,7 +147,7 @@ export class AufyClient {
     }
 
     async resendEmailConfirmation(email: string): Promise<void> {
-        return this.axios.post(this.accountApiPrefix + '/email/confirm/resend', {email});
+        return this.axios.post(this.accountApiPrefix + '/email/confirm/resend', { email });
     }
 
     async confirmEmail(code: string, userId: string): Promise<AxiosResponse> {
