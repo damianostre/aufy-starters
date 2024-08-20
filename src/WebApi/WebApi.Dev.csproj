@@ -11,8 +11,8 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <SpaRoot>../Client.React</SpaRoot>
-        <SpaProxyServerUrl>https://localhost:5000</SpaProxyServerUrl>
+        <SpaRoot>../Client.Vue</SpaRoot>
+        <SpaProxyServerUrl>http://localhost:5000</SpaProxyServerUrl>
         <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     </PropertyGroup>
 

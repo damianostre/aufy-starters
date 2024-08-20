@@ -1,35 +1,27 @@
-@import './base.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+/* Custom CSS */
+
+.primary-color {
+  color: #467a71;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+.hover\:primary-color:hover {
+  color: #467a71;
+  opacity: 0.9;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.primary-bg {
+  background-color: #467a71;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.hover\:primary-bg:hover {
+  background-color: #467a71;
+  opacity: 0.9;
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.focus\:primary-color:focus {
+  --tw-ring-color: #467a71;
 }
