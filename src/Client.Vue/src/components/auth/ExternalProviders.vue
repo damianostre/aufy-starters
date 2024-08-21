@@ -1,7 +1,7 @@
 ﻿<template>
     <div class="grid grid-cols-2 gap-4">
         <a
-            v-if="!hide.includes('Discord')"
+            v-if="!hide || !hide.includes('Discord')"
             @click="challenge('discord')"
             :class="['flex w-full items-center justify-center gap-3 rounded-md bg-[#5865F2] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#5865F2]', { 'cursor-not-allowed opacity-40': disabled, 'cursor-pointer': !disabled }]"
             style="max-width: 15rem"
@@ -15,7 +15,7 @@
         </a>
 
         <a
-            v-if="!hide.includes('GitHub')"
+            v-if="!hide || !hide.includes('GitHub')"
             @click="challenge('github')"
             :class="['max-w-xs flex w-full items-center justify-center gap-3 rounded-md bg-[#24292F] px-3 py-1.5 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#24292F]', { 'cursor-not-allowed opacity-40': disabled, 'cursor-pointer': !disabled }]"
             style="max-width: 15rem"

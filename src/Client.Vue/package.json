@@ -17,6 +17,7 @@
     "axios": "^1.4.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
+    "zod": "^3.21.4",
     "aufy-client": "file:../AufyClient"
   },
   "devDependencies": {

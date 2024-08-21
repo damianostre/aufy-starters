@@ -36,6 +36,6 @@
 
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import SignInForm from '@/components/SignInForm.vue'
 import ExternalProviders from '@/components/auth/ExternalProviders.vue';
+import SignInForm from '@/components/auth/SignInForm.vue';
 </script>
