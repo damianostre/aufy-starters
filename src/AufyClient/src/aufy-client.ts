@@ -1,7 +1,7 @@
-import { aufyDefaultStorage, AufyStorage } from './aufy-storage.js';
+import { aufyDefaultStorage, type AufyStorage } from './aufy-storage.js';
 import { createAxiosInstance } from './axios-utils.js';
-import Axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
-import {
+import Axios, { type AxiosInstance, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios';
+import type {
     AccountInfoResponse, AufyClientOptions,
     AuthUser, ChangePasswordRequest,
     ExternalChallengeRequest, ResetPasswordRequest,
@@ -18,8 +18,10 @@ export class AufyClient {
     private readonly storage: AufyStorage;
     private readonly axios: AxiosInstance;
     private onSignOut: () => void = () => {
+        return;
     };
     private onSignIn: (user: AuthUser) => void = () => {
+        return;
     };
 
     constructor(options: AufyClientOptions) {
@@ -58,7 +60,7 @@ export class AufyClient {
                 this.onSignIn && this.onSignIn(user);
                 return user;
             });
-    };
+    }
 
     externalChallenge(data: ExternalChallengeRequest) {
         const callbackUrl = data.mode == 'SignIn'
@@ -78,7 +80,7 @@ export class AufyClient {
             .then((res) => {
                 return res.data;
             });
-    };
+    }
 
     async signUpExternal(data: SignUpExternalRequest): Promise<AuthUser | AxiosResponse> {
         const path = '/signup/external';
@@ -117,6 +119,7 @@ export class AufyClient {
     async signOut(): Promise<void> {
         return this.axios.post(this.authApiPrefix + '/signout')
             .then(() => {
+                return;
             })
             .finally(() => {
                 this.storage.clearToken();
@@ -124,7 +127,7 @@ export class AufyClient {
 
                 this.onSignOut && this.onSignOut();
             });
-    };
+    }
 
     async refreshToken(): Promise<TokenResponse> {
         const ax = createAxiosInstance(this.apiBaseUrl);
@@ -136,11 +139,11 @@ export class AufyClient {
 
     async forgotPassword(email: string) {
         return this.axios.post(this.accountApiPrefix + '/password/forgot', { email });
-    };
+    }
 
     async resetPassword(data: ResetPasswordRequest): Promise<AxiosResponse> {
         return this.axios.post(this.accountApiPrefix + '/password/reset', data);
-    };
+    }
 
     async changePassword(data: ChangePasswordRequest): Promise<AxiosResponse> {
         return this.axios.post(this.accountApiPrefix + '/password/change', data);

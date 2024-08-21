@@ -1,4 +1,4 @@
-import { AuthUser } from './types.ts'
+import { type AuthUser } from './types.js';
 
 const storagePrefix = 'aufy_';
 

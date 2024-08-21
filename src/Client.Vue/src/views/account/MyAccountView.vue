@@ -45,9 +45,10 @@ import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import ExternalProviders from '@/components/auth/ExternalProviders.vue';
 import { useAuth } from '@/stores/AuthStore';
-import type { AuthUser } from 'aufy-client/src/types';
+import type { AccountInfoResponse } from 'aufy-client/src/types';
+import ChangePasswordForm from '@/components/account/ChangePasswordForm.vue';
 
-const user = ref<AuthUser | null>(null);
+const user = ref<AccountInfoResponse | null>(null);
 const { aufy } = useAuth();
 const route = useRoute();
 
