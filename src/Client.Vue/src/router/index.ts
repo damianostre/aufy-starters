@@ -24,7 +24,12 @@ const router = createRouter({
             path: '/signup',
             name: 'signup',
             component: () => import('../views/auth/SignUpView.vue'),
-        }
+        },
+        {
+            path: '/signup/confirmation',
+            name: 'signup-confirmation',
+            component: () => import('../views/auth/SignUpConfirmationView.vue'),
+        },
 
     ],
 });
