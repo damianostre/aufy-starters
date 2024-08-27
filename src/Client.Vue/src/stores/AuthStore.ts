@@ -14,7 +14,7 @@ const authStore = reactive<{
     user: AuthUser | null,
     aufy: AufyClient,
 }>({
-    user: null,
+    user: aufy.getUser(),
     aufy,
 });
 

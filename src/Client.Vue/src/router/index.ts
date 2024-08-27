@@ -14,6 +14,7 @@ import ResetPasswordConfirmationView from '@/views/account/ResetPasswordConfirma
 import ConfirmEmailView from '@/views/account/ConfirmEmailView.vue';
 import SignUpExternalView from '@/views/auth/SignUpExternalView.vue';
 import MainLayout from '@/views/MainLayout.vue';
+import { useAuth } from '@/stores/AuthStore';
 
 const routes = [
     { path: '/signin', component: SignInView, name: 'signin' },
@@ -42,5 +43,17 @@ const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes,
 });
+
+router.beforeEach((to, from) => {
+    const { user } = useAuth();
+
+    if (to.meta.requiresAuth && !user) {
+        return {
+            path: '/signin',
+            // save the location we were at to come back later
+            // query: { redirect: to.fullPath },
+        }
+    }
+})
 
 export default router;
