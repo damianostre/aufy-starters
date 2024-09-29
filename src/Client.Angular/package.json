@@ -22,7 +22,8 @@
     "@angular/router": "^18.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.14.10",
+    "aufy-client": "file:../AufyClient"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.1",
