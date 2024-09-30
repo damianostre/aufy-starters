@@ -1,5 +1,5 @@
 ﻿import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {AuthService} from "../../services/auth.service";
 import {extractApiErrors} from "aufy-client/src/axios-utils";
@@ -24,7 +24,7 @@ export class SignUpFormComponent {
 
   passwordMatchValidator(form: FormGroup) {
     return form.get('password')?.value === form.get('confirmPassword')?.value
-      ? null : {mismatch: true};
+      ? null : { passwordMismatch: true };
   }
 
   async onSubmit() {
