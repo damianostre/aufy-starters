@@ -1,0 +1,17 @@
+@if (!valid()) {
+  <h1>Invalid request</h1>
+}
+
+@if (loading()) {
+  <h1>Confirming email...</h1>
+}
+
+@if (!loading() && !success()) {
+  <h1>Something went wrong</h1>
+  <p>Please try again later.</p>
+}
+
+@if (!loading() && success()) {
+  <h1>Email confirmed!</h1>
+  <p><strong><a routerLink="/signin">Sign In</a></strong></p>
+}
