@@ -1,26 +1,32 @@
-﻿import {Component} from '@angular/core';
-import {FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+﻿import { Component, inject, signal } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
 import {AuthService} from "../../services/auth.service";
-import {extractApiErrors} from "aufy-client/src/axios-utils";
+import { extractApiErrors } from 'aufy-client/src/axios-utils';
 
 @Component({
   selector: 'signup-form',
   templateUrl: './signup-form.component.html',
-  standalone: true
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+  ],
+  standalone: true,
 })
 export class SignUpFormComponent {
-  form: FormGroup;
-  apiErrors: string[] = [];
-  isSubmitting = false;
+  authService = inject(AuthService);
+  router = inject(Router);
+  fb = inject(FormBuilder);
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', [Validators.required, this.passwordMatchValidator]]
-    });
-  }
+  form = this.fb.nonNullable.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', [Validators.required, this.passwordMatchValidator]]
+  });
+
+  apiErrors = signal<string[] | undefined>(undefined);
+  isSubmitting = signal(false);
+
 
   passwordMatchValidator(form: FormGroup) {
     return form.get('password')?.value === form.get('confirmPassword')?.value
@@ -32,14 +38,14 @@ export class SignUpFormComponent {
       return;
     }
 
-    this.isSubmitting = true;
+    this.isSubmitting.set(true);
     try {
-      await this.authService.aufy().signUp(this.form.value);
-      await this.router.navigate(['/']);
+      const res =await this.authService.aufy().signUp(this.form.getRawValue());
+      await this.router.navigate(['/signup/confirmation'], { state: { ...res } });
     } catch (error) {
-      this.apiErrors = this.extractApiErrors(error) ?? ['Error occurred'];
+      this.apiErrors.set(extractApiErrors(error) ?? ['Error occurred']);
     } finally {
-      this.isSubmitting = false;
+      this.isSubmitting.set(false);
     }
   }
 }

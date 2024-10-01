@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -14,20 +14,17 @@ import {extractApiErrors} from "aufy-client/src/axios-utils";
   ],
 })
 export class SignInFormComponent {
-  form: FormGroup;
   isSubmitting = false;
   apiErrors: string[] | undefined;
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
-  ) {
-    this.form = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    });
-  }
+  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
+  form = this.fb.nonNullable.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required]]
+  });
 
   async onSubmit() {
     if (this.form.invalid) {
@@ -38,10 +35,10 @@ export class SignInFormComponent {
     this.apiErrors = undefined;
 
     try {
-      await this.authService.aufy().signIn(this.form.value);
+      await this.authService.aufy().signIn(this.form.getRawValue());
       await this.router.navigate(['/']);
     } catch (error) {
-      this.apiErrors = this.extractApiErrors(error) ?? ['Error occurred'];
+      this.apiErrors = extractApiErrors(error) ?? ['Error occurred'];
     } finally {
       this.isSubmitting = false;
     }
