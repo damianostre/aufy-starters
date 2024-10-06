@@ -7,7 +7,6 @@ import { AuthService } from '../../../auth/services/auth.service';
   selector: 'main-layout',
   standalone: true,
   imports: [RouterOutlet, RouterLink, NgClass],
-  providers: [AuthService],
   templateUrl: './main-layout.component.html',
 })
 export class MainLayoutComponent {

@@ -2,13 +2,13 @@ import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../../auth/services/auth.service';
-import { extractApiErrors } from '../../../core/utils/api-error-extractor';
+import { extractApiErrors } from 'aufy-client/src/axios-utils';
 
 @Component({
   selector: 'resend-email-confirmation-page',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './resend-email-confirmation.component.html'
+  templateUrl: './resend-email-confirmation-page.component.html'
 })
 export class ResendEmailConfirmationPageComponent {
   private fb = inject(FormBuilder);

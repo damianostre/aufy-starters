@@ -24,7 +24,7 @@ export class SignUpFormComponent {
     confirmPassword: ['', [Validators.required, this.passwordMatchValidator]]
   });
 
-  apiErrors = signal<string[] | undefined>(undefined);
+  apiErrors = signal<string[] | null>(null);
   isSubmitting = signal(false);
 
 

@@ -1,11 +1,11 @@
 ﻿<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5" novalidate>
-  @if (apiErrors) {
+  @if (apiErrors()) {
     <div class="rounded-md bg-red-50 p-4">
       <div class="flex">
         <div class="ml-3">
           <div class="mt-2 text-sm text-red-700">
             <ul role="list" class="list-disc space-y-1 pl-5">
-              @for (error of apiErrors; track error) {
+              @for (error of apiErrors(); track error) {
                 <li>{{ error }}</li>
               }
             </ul>
@@ -52,8 +52,8 @@
   </div>
 
   <div>
-    <button type="submit" class="flex w-full justify-center rounded-md hover:primary-bg primary-bg px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" [disabled]="isSubmitting">
-      {{ isSubmitting ? 'Signing up...' : 'Sign up' }}
+    <button type="submit" class="flex w-full justify-center rounded-md hover:primary-bg primary-bg px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" [disabled]="isSubmitting()">
+      {{ isSubmitting() ? 'Signing up...' : 'Sign up' }}
     </button>
   </div>
 

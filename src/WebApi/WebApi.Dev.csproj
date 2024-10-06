@@ -10,10 +10,16 @@
         <RootNamespace>WebApi</RootNamespace>
     </PropertyGroup>
 
+<!--    <PropertyGroup>-->
+<!--        <SpaRoot>../Client.Vue</SpaRoot>-->
+<!--        <SpaProxyServerUrl>https://localhost:5000</SpaProxyServerUrl>-->
+<!--        <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>-->
+<!--    </PropertyGroup>-->
+
     <PropertyGroup>
-        <SpaRoot>../Client.Vue</SpaRoot>
+        <SpaRoot>../Client.Angular</SpaRoot>
         <SpaProxyServerUrl>https://localhost:5000</SpaProxyServerUrl>
-        <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
+        <SpaProxyLaunchCommand>npm run start</SpaProxyLaunchCommand>
     </PropertyGroup>
 
 <!--     <PropertyGroup> -->
