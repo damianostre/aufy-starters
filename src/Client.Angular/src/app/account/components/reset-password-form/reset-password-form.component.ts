@@ -18,7 +18,12 @@ export class ResetPasswordFormComponent {
   private router = inject(Router);
   private authService = inject(AuthService);
 
-  resetForm: FormGroup;
+  resetForm = this.fb.nonNullable.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPassword: ['', [Validators.required, this.passwordMatchValidator]]
+  });
+
   apiErrors = signal<string[] | undefined>(undefined);
   isSubmitting = signal(false);
   code: string;
@@ -28,12 +33,6 @@ export class ResetPasswordFormComponent {
     if (!this.code) {
       throw new Error('Invalid code');
     }
-
-    this.resetForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
-    }, { validators: this.passwordMatchValidator });
   }
 
   onSubmit(): void {
@@ -41,7 +40,7 @@ export class ResetPasswordFormComponent {
       this.isSubmitting.set(true);
       this.apiErrors.set(undefined);
 
-      const { email, password } = this.resetForm.value;
+      const { email, password } = this.resetForm.getRawValue();
       this.authService.aufy().resetPassword({ email, password, code: this.code }).then(() => {
           this.router.navigate(['/reset-password/confirmation']);
         }).catch((error) => {
@@ -51,9 +50,8 @@ export class ResetPasswordFormComponent {
     }
   }
 
-  passwordMatchValidator(group: FormGroup): { [key: string]: any } | null {
-    const password = group.get('password')?.value;
-    const confirmPassword = group.get('confirmPassword')?.value;
-    return password === confirmPassword ? null : { passwordMismatch: true };
+  passwordMatchValidator(form: FormGroup) {
+    return form.get('password')?.value === form.get('confirmPassword')?.value
+      ? null : { passwordMismatch: true };
   }
 }

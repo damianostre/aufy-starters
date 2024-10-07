@@ -24,7 +24,6 @@ export class MyAccountPageComponent {
     this.authService.aufy().accountInfo().then(res => this.user.set(res));
 
     const { link, failed } = this.route.snapshot.queryParams;
-
     if (link) {
       if (failed) {
         alert("Failed to link account");

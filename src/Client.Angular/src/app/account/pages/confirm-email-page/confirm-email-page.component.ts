@@ -1,12 +1,12 @@
 import { Component, inject, signal, effect } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'confirm-email-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './confirm-email-page.component.html'
 })
 export class ConfirmEmailPageComponent {
@@ -25,13 +25,13 @@ export class ConfirmEmailPageComponent {
     const params = this.route.snapshot.queryParamMap;
     this.code.set(params.get('code'));
     this.userId.set(params.get('userId'));
-    this.valid.set(!!this.code() && !!this.userId());
 
-    effect(() => {
-      if (this.valid()) {
-        this.confirmEmail();
-      }
-    });
+    const valid = !!this.code() && !!this.userId();
+    this.valid.set(valid);
+
+    if (valid) {
+      this.confirmEmail();
+    }
   }
 
   private confirmEmail() {

@@ -16,11 +16,10 @@ export const aufy = new AufyClient({
   providedIn: 'root'
 })
 export class AuthService extends RootInjectorGuard {
-  private userSig = signal<AuthUser | null>(aufy.getUser());
+  private _user = signal<AuthUser | null>(aufy.getUser());
 
   public isAuthenticated = computed(() => !!this.user());
-  public user = computed(() => this.userSig());
-  public user2: AuthUser | null = null;
+  public user = computed(() => this._user());
 
   public aufy() {
     return aufy;
@@ -30,19 +29,17 @@ export class AuthService extends RootInjectorGuard {
     super(AuthService);
 
     aufy.initAxiosInterceptors(() => {
-      this.userSig.set(null);
+      this._user.set(null);
     });
 
     aufy.onEvents({
       onSignIn: (user) => {
         debugger;
-          this.userSig.set(user);
-          this.user2 = user;
+          this._user.set(user);
       },
       onSignOut: () => {
         debugger;
-          this.userSig.set(null);
-          this.user2 = null;
+          this._user.set(null);
       },
     });
   }
