@@ -12,7 +12,7 @@
 
     <PropertyGroup>
         <SpaRoot>../Client.Vue</SpaRoot>
-        <SpaProxyServerUrl>http://localhost:5173</SpaProxyServerUrl>
+        <SpaProxyServerUrl>http://localhost:5000</SpaProxyServerUrl>
         <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
     </PropertyGroup>
 

@@ -10,25 +10,15 @@
         <RootNamespace>WebApi</RootNamespace>
     </PropertyGroup>
 
-<!--    <PropertyGroup>-->
-<!--        <SpaRoot>../Client.Vue</SpaRoot>-->
-<!--        <SpaProxyServerUrl>https://localhost:5000</SpaProxyServerUrl>-->
-<!--        <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>-->
-<!--    </PropertyGroup>-->
-
-<!--    <PropertyGroup>-->
-<!--        <SpaRoot>../Client.Angular</SpaRoot>-->
-<!--        <SpaProxyServerUrl>https://localhost:5000</SpaProxyServerUrl>-->
-<!--        <SpaProxyLaunchCommand>npm run start</SpaProxyLaunchCommand>-->
-<!--    </PropertyGroup>-->
-
-     <PropertyGroup>
-         <SpaRoot>../Client.React</SpaRoot>
-         <SpaProxyServerUrl>https://localhost:5000</SpaProxyServerUrl>
-         <SpaProxyLaunchCommand>npm run dev</SpaProxyLaunchCommand>
-     </PropertyGroup>
+    <PropertyGroup>
+        <SpaRoot>../Client.Angular</SpaRoot>
+        <SpaProxyServerUrl>http://localhost:5000</SpaProxyServerUrl>
+        <SpaProxyLaunchCommand>npm run start</SpaProxyLaunchCommand>
+    </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Aufy.EntityFrameworkCore"/>
+        <PackageReference Include="Aufy.FluentEmail"/>
         <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore"/>
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore"/>
         <PackageReference Include="Microsoft.AspNetCore.SpaProxy"/>
@@ -51,9 +41,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\..\aufy\src\Aufy.EntityFrameworkCore\Aufy.EntityFrameworkCore.csproj" />
-        <ProjectReference Include="..\..\..\aufy\src\Aufy.FluentEmail\Aufy.FluentEmail.csproj" />
-        <ProjectReference Include="..\Client.React\Client.React.csproj" />
         <ProjectReference Include="..\Client.Vue\Client.Vue.csproj" />
     </ItemGroup>
 
