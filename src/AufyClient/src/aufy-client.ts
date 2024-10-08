@@ -191,7 +191,8 @@ export class AufyClient {
                 await this.refreshToken();
                 return this.axios.request(originalRequestConfig);
             } catch (error) {
-                await this.signOut();
+                this.storage.clearToken();
+                this.storage.clearUser();
                 onSignOut && onSignOut();
 
                 return Promise.reject(error);

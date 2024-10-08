@@ -28,7 +28,7 @@
         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
       />
     </div>
-    @if (form.get('email')?.invalid && (form.get('email')?.touched || formErrors().email)) {
+    @if (form.get('email')?.invalid && (form.get('email')?.touched)) {
       <p class="mt-2 text-sm text-red-600">
         {{ form.get('email')?.hasError('required') ? 'Email is required' : 'Must be a valid email' }}
       </p>
@@ -47,7 +47,7 @@
         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
       />
     </div>
-    @if (form.get('aboutMe')?.invalid && (form.get('aboutMe')?.touched || formErrors().aboutMe)) {
+    @if (form.get('aboutMe')?.invalid && (form.get('aboutMe')?.touched)) {
       <p class="mt-2 text-sm text-red-600">
         About me must be at most 100 characters
       </p>
@@ -66,7 +66,7 @@
         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
       />
     </div>
-    @if (form.get('mySiteUrl')?.invalid && (form.get('mySiteUrl')?.touched || formErrors().mySiteUrl)) {
+    @if (form.get('mySiteUrl')?.invalid && (form.get('mySiteUrl')?.touched)) {
       <p class="mt-2 text-sm text-red-600">
         Must be a valid URL
       </p>
@@ -86,7 +86,7 @@
         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
       />
     </div>
-    @if (form.get('password')?.invalid && (form.get('password')?.touched || formErrors().password)) {
+    @if (form.get('password')?.invalid && (form.get('password')?.touched)) {
       <p class="mt-2 text-sm text-red-600">
         Password must be at least 6 characters
       </p>
@@ -106,7 +106,7 @@
         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
       />
     </div>
-    @if (form.hasError('mismatch') && (form.get('confirmPassword')?.touched || formErrors().confirmPassword)) {
+    @if (form.hasError('mismatch') && (form.get('confirmPassword')?.touched || form.hasError('mismatch'))) {
       <p class="mt-2 text-sm text-red-600">
         Passwords don't match
       </p>

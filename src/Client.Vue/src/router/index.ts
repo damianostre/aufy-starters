@@ -13,14 +13,23 @@ import ResetPasswordView from '@/views/account/ResetPasswordView.vue';
 import ResetPasswordConfirmationView from '@/views/account/ResetPasswordConfirmationView.vue';
 import ConfirmEmailView from '@/views/account/ConfirmEmailView.vue';
 import SignUpExternalView from '@/views/auth/SignUpExternalView.vue';
+import SignUpExtendedView from '@/views/auth/SignUpExtendedView.vue';
+import SignUpExternalExtendedView from '@/views/auth/SignUpExternalExtendedView.vue';
 import MainLayout from '@/views/MainLayout.vue';
 import { useAuth } from '@/stores/AuthStore';
 
 const routes = [
     { path: '/signin', component: SignInView, name: 'signin' },
     { path: '/signout', component: SignOutView, name: 'signout' },
+    
     { path: '/signup', component: SignUpView, name: 'signup' },
+    // Uncomment the following line to enable sign up with additional fields
+    { path: '/signup', component: SignUpExtendedView },
+
     { path: '/signup-external', component: SignUpExternalView, name: 'signup-external' },
+    // Uncomment the following line to enable external sign up with additional fields
+    { path: '/signup-external', component: SignUpExternalExtendedView },
+
     {
         path: '/',
         component: MainLayout,

@@ -6,14 +6,14 @@ import { routes as authRoutes } from './auth/auth.routes';
 import { accountRoutes } from './account/account.routes';
 
 export const routes: Routes = [
-  ...authRoutes,
-  ...accountRoutes,
-  {
+  {    
     path: '', component: MainLayoutComponent,
     children: [
       { path: '', component: HomePageComponent },
       { path: 'features', component: FeaturesPageComponent },
     ],
   },
+  ...authRoutes,
+  ...accountRoutes,
 ];
 

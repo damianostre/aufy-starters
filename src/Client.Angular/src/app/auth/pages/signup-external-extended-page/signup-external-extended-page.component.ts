@@ -10,9 +10,9 @@ import { extractApiErrors } from 'aufy-client/src/axios-utils';
   selector: 'app-sign-up-external-extended',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
-  templateUrl: './sign-up-external-extended.component.html'
+  templateUrl: './signup-external-extended-page.component.html'
 })
-export class SignUpExternalExtendedComponent {
+export class SignUpExternalExtendedPageComponent {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private authService = inject(AuthService);
