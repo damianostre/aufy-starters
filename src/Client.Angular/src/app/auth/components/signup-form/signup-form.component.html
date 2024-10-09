@@ -1,0 +1,66 @@
+﻿<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-5" novalidate>
+  @if (apiErrors()) {
+    <div class="rounded-md bg-red-50 p-4">
+      <div class="flex">
+        <div class="ml-3">
+          <div class="mt-2 text-sm text-red-700">
+            <ul role="list" class="list-disc space-y-1 pl-5">
+              @for (error of apiErrors(); track error) {
+                <li>{{ error }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+
+  <div>
+    <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+    <div class="mt-2">
+      <input formControlName="email" type="email" id="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+    </div>
+    @if (form.get('email')?.invalid && form.get('email')?.touched) {
+      <p class="mt-2 text-sm text-red-600">
+        {{ form.get('email')?.errors?.['required'] ? 'Email is required' : 'Must be a valid email' }}
+      </p>
+    }
+  </div>
+
+  <div>
+    <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+    <div class="mt-2">
+      <input formControlName="password" type="password" id="password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+    </div>
+    @if (form.get('password')?.invalid && form.get('password')?.touched) {
+      <p class="mt-2 text-sm text-red-600">
+        {{ form.get('password')?.errors?.['required'] ? 'Password is required' : 'Password must be at least 6 characters' }}
+      </p>
+    }
+  </div>
+
+  <div>
+    <label for="confirmPassword" class="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
+    <div class="mt-2">
+      <input formControlName="confirmPassword" type="password" id="confirmPassword" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6" />
+    </div>
+    @if (form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched) {
+      <p class="mt-2 text-sm text-red-600">
+        {{ form.get('confirmPassword')?.errors?.['required'] ? 'Confirm Password is required' : 'Passwords don\'t match' }}
+      </p>
+    }
+  </div>
+
+  <div>
+    <button type="submit" class="flex w-full justify-center rounded-md hover:primary-bg primary-bg px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" [disabled]="isSubmitting()">
+      {{ isSubmitting() ? 'Signing up...' : 'Sign up' }}
+    </button>
+  </div>
+
+  <div class="flex items-center justify-between">
+    <div class="text-sm leading-6">
+      Already have an account?
+      <a routerLink="/signin" class="ml-3 font-semibold primary-color hover:primary-color">Sign in</a>
+    </div>
+  </div>
+</form>

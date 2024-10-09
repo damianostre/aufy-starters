@@ -3,8 +3,8 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useState} from "react";
-import {extractApiErrors} from "../../../lib/axios.ts";
-import {auth} from "../../../api/auth.ts";
+import { useAuth } from '../../../providers/AuthProvider.tsx';
+import { extractApiErrors } from 'aufy-client/src/axios-utils.ts';
 
 export const ResetPasswordForm = () => {
     const [params] = useSearchParams();
@@ -19,8 +19,9 @@ export const ResetPasswordForm = () => {
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm<FormModel>({
         resolver: zodResolver(validationSchema),
     });
+    const { aufy } = useAuth();
     const onSubmit: SubmitHandler<FormModel> = data => {
-        auth.resetPassword({email: data.email, password: data.password, code: code}).then(() => {
+        aufy.resetPassword({email: data.email, password: data.password, code: code}).then(() => {
             navigate("/reset-password/confirmation");
         }).catch((error) => {
             setApiErrors(extractApiErrors(error) ?? ["Error occured"]);

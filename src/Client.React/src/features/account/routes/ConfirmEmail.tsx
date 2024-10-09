@@ -1,6 +1,6 @@
 import {Link, useSearchParams} from "react-router-dom";
-import {auth} from "../../../api/auth.ts";
 import {useEffect, useState} from "react";
+import { useAuth } from '../../../providers/AuthProvider.tsx';
 
 export const ConfirmEmail = () => {
     const [params] = useSearchParams();
@@ -10,11 +10,12 @@ export const ConfirmEmail = () => {
 
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
+    const { aufy } = useAuth();
 
     useEffect(() => {
             if (valid) {
                 setLoading(true);
-                auth.confirmEmail(code, userId).then(() => {
+                aufy.confirmEmail(code, userId).then(() => {
                     setLoading(false);
                     setSuccess(true);
                 }).catch(() => {

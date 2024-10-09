@@ -1,0 +1,14 @@
+{
+  "/api": {
+    "target": "https://localhost:7050",
+    "changeOrigin": true,
+    "secure": false
+  },
+  "/swagger": {
+    "target": "https://localhost:7050",
+    "changeOrigin": true,
+    "secure": false
+  }
+}
+
+

@@ -3,8 +3,8 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useState} from "react";
-import {extractApiErrors} from "../../../lib/axios.ts";
 import {useAuth} from "../../../providers/AuthProvider.tsx";
+import { extractApiErrors } from 'aufy-client/src/axios-utils.ts';
 
 export const SignInForm = () => {
     const [apiErrors, setApiErrors] = useState<string[]>();
@@ -13,9 +13,9 @@ export const SignInForm = () => {
         resolver: zodResolver(validationSchema),
     });
 
-    const {signIn} = useAuth();
+    const { aufy } = useAuth();
     const onSubmit: SubmitHandler<FormModel> = data => {
-        signIn({email: data.email, password: data.password, rememberMe: true}).then(() => {
+        aufy.signIn({email: data.email, password: data.password}).then(() => {
             navigate("/");
         }).catch((error) => {
             setApiErrors(extractApiErrors(error) ?? ["Error occured"]);

@@ -1,9 +1,9 @@
-<script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+﻿<script setup lang="ts">
+// No additional script logic needed for this simple component
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+    <div>
+        <h1>Welcome to the Vue.js Aufy Template</h1>
+    </div>
 </template>

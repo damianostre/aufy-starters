@@ -10,4 +10,11 @@
         <SupportedPlatform Include="browser" />
     </ItemGroup>
 
+
+    <ItemGroup>
+      <Folder Include="src\components\" />
+      <Folder Include="src\views\account\" />
+      <Folder Include="src\views\auth\" />
+    </ItemGroup>
+
 </Project>

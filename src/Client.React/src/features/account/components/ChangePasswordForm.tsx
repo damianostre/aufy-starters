@@ -2,8 +2,8 @@ import {SubmitHandler, useForm} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useState} from "react";
-import {extractApiErrors} from "../../../lib/axios.ts";
-import {auth} from "../../../api/auth.ts";
+import { useAuth } from '../../../providers/AuthProvider.tsx';
+import { extractApiErrors } from 'aufy-client/src/axios-utils.ts';
 
 export const ChangePasswordForm = () => {
     const [apiErrors, setApiErrors] = useState<string[]>();
@@ -11,8 +11,9 @@ export const ChangePasswordForm = () => {
     const {register, handleSubmit, formState: { isSubmitting, errors }} = useForm<FormModel>({
         resolver: zodResolver(validationSchema),
     });
+    const { aufy } = useAuth();
     const onSubmit: SubmitHandler<FormModel> = data => {
-        return auth.changePassword({password: data.password, newPassword: data.newPassword}).then(() => {
+        return aufy.changePassword({password: data.password, newPassword: data.newPassword}).then(() => {
             setNotification("Password changed successfully");
         }).catch((error) => {
             setApiErrors(extractApiErrors(error) ?? ["Error occured"]);

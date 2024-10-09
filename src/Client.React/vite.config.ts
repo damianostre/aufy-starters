@@ -27,22 +27,20 @@ if (!fs.existsSync(certFilePath) || !fs.existsSync(keyFilePath)) {
         '--format',
         'pem',
         '-ep',
-        certFilePath,       
+        certFilePath,
         '--no-password',
     ], { stdio: 'inherit', });
-    
+
     if (res.status !== 0) {
         console.error('Failed to generate certificate.');
     }
 }
 
-
-// https://vitejs.dev/config/
 export default defineConfig({
     server: {
         port: 5000,
         proxy: {
-            '/api': {   
+            '/api': {
                 target: 'https://localhost:7050',
                 changeOrigin: true,
                 secure: false,

@@ -2,7 +2,7 @@ import {SignUpForm} from "../components/SignUpForm.tsx";
 import {ExternalProviders} from "../components/ExternalProviders.tsx";
 import {Link} from "react-router-dom";
 
-export const SignUp = () => {    
+export const SignUp = () => {
     return (
         <>
             <div className="flex min-h-full flex-1 flex-col justify-center py-6 sm:px-6 lg:px-8">
@@ -15,7 +15,17 @@ export const SignUp = () => {
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
                     <div className="bg-white px-6 py-8 shadow sm:rounded-lg sm:px-12">
                         <SignUpForm/>
-                        <ExternalProviders/>
+
+                        <div className="relative mt-10 mb-6">
+                            <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                                <div className="w-full border-t border-gray-200"/>
+                            </div>
+                            <div className="relative flex justify-center text-sm font-medium leading-6">
+                                <span className="bg-white px-6 text-gray-900">Or continue with</span>
+                            </div>
+                        </div>
+
+                        <ExternalProviders mode="SignIn"/>
                     </div>
                     <div>
                         <Link to="/"
