@@ -1,7 +1,7 @@
 export const Home = () => {
     return (
         <div>
-            <h1>Home</h1>
+            <h1>Welcome to the React Aufy Template</h1>
         </div>
     );
 };

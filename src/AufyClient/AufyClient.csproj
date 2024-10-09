@@ -20,4 +20,8 @@
       <Folder Include="wwwroot\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageVersion Update="Microsoft.AspNetCore.Components.Web" Version="8.0.10" />
+    </ItemGroup>
+
 </Project>

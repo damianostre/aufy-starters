@@ -12,7 +12,7 @@
 
     <PropertyGroup>
         <SpaRoot>../Client.Angular</SpaRoot>
-        <SpaProxyServerUrl>http://localhost:5000</SpaProxyServerUrl>
+        <SpaProxyServerUrl>https://localhost:5000</SpaProxyServerUrl>
         <SpaProxyLaunchCommand>npm run start</SpaProxyLaunchCommand>
     </PropertyGroup>
 
